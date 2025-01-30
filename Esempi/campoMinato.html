@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>Campo minato</title>
+    </head>
+    <body>
+        <script>
+            const N = 2;
+            let bombe = [];
+            let matrice = [];
+            let max = N*N-N/2;
+
+            bombe.include = function(elem){
+                for(let i=0; i<this.length; i++)
+                    if(this[i].x === elem.x && this[i].y === elem.y)
+                        return true;
+                
+                return false;
+            }
+
+            bombe.create = function(dim=N/2){
+                for(let i=0; i<dim; i++){
+                    let niu = {x: Math.floor(Math.random()*N), y: Math.floor(Math.random()*N)}
+                    bombe.include(niu) ? i-- : bombe.push(niu)
+                }
+            }
+
+            matrice.create = function(dim=N){
+                for(let i=0; i<N; i++)
+                for(let j=0; j<N; j++)
+                    if(bombe.include({x: i, y: j}))
+                        matrice.push('X');
+                    else
+                        matrice.push('0');
+            }
+
+            matrice.checkNeighbor = function(x, y){
+                let count = 0;
+                for(let i=-1; i<=1; i++)
+                    for(let j=-1; j<=1; j++)
+                        if(bombe.include({x: x+i, y: y+j}))
+                            count++;
+
+                if(count === 0)
+                    return 'O';
+                
+                return count;
+            }
+
+            bombe.create();
+            matrice.create();
+                    
+                
+            let table = document.createElement("table");
+            for(let i=0; i<N; i++){
+                let tr = document.createElement("tr");
+                for(let j=0; j<N; j++){
+                    let td = document.createElement("td");
+                    let index = matrice[i*N+j];
+                    td.innerHTML = index;
+
+                    if(index === 'X')
+                        td.addEventListener('click', () =>{
+                            alert('Hai perso!\nTi mancavano '+(max)+' caselle libere.');
+                            document.body.removeChild(table);
+                        });
+                    else
+                        td.addEventListener('click', () =>{
+                            td.innerHTML = matrice.checkNeighbor(i, j);
+                            max--;
+                            if(max === 0){
+                                alert('Hai vinto!');
+                                document.body.removeChild(table);
+                            }
+                        });
+                    
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            document.body.appendChild(table);
+        </script>
+    </body>
+</html>

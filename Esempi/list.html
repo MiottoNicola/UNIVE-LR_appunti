@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <title>Restaurant List</title>
+    </head>
+    <body>
+        <h1>Restaurant List</h1>
+        <h2>Pizzeria</h2>
+        <div class="menu">
+            <div>Margherita;pomodoro, mozzarella;5.00€</div>
+            <div>Patatosa;pomodoro, mozzarella, patatine fritte;6.50€</div>
+            <div>Gustosa;pomodoro, mozzarella, salame piccante, ricotta;7.00€</div>
+            <div>Romana;pomodoro, mozzarella, ricotta, acciughe, capperi e origano;7.50€</div>
+        </div>
+
+        <h2>Bar</h2>
+        <div class="menu">
+            <div>Caffè;ristretto, normale o lungo;1.00€</div>
+            <div>Cappuccino;caldo o freddo;1.50€</div>
+            <div>Tea;pesca, limone, menta;1.00€</div>
+            <div>Acqua;naturale o frizzante;0.50€</div>
+        </div>
+        <br/>
+        <table>
+            <tr>
+                <td>Final check: </td>
+                <td id="grandTotal">0.00</td>
+                <td>€</td>
+            </tr>
+        </table>
+        <br/>
+        <button onclick="checkout()">Pay</button>
+        <script>
+            let grandTotal = 0.00;
+
+            let menuDiv = document.getElementsByClassName("menu");
+
+            let grandTotalDiv = document.getElementById("grandTotal");
+
+            while(menuDiv.length > 0){
+                let index = menuDiv[0];
+
+                let table = document.createElement("table");
+
+                let totalText = document.createElement("td");
+                totalText.innerHTML = "Total:";
+                let total = document.createElement("td");
+                total.innerHTML = "0.00";
+                let tr = document.createElement("tr");
+                tr.appendChild(totalText);
+                tr.appendChild(total);
+                table.appendChild(tr);
+
+                index.parentNode.insertBefore(table, index);
+                index.parentNode.insertBefore(totalText, index);
+                index.parentNode.insertBefore(total, index);
+
+                index.parentNode.removeChild(index);
+
+                let divs = index.getElementsByTagName("div");
+                while(divs.length > 0){
+                    let div = divs[0];
+                    let split = div.innerHTML.split(";");
+                    let name = split[0];
+                    let ingredients = split[1];
+                    let price = split[2];
+
+                    let nomeTd = document.createElement("td");
+                    nomeTd.innerHTML = name;
+                    nomeTd.addEventListener("mouseover", () => { nomeTd.innerHTML = ingredients; });
+                    nomeTd.addEventListener("mouseout", () => { nomeTd.innerHTML = name; });
+
+                    let priceTd = document.createElement("td");
+                    priceTd.innerHTML = price;
+                    priceTd.addEventListener("click", () => { 
+                        total.innerHTML = parseFloat(total.innerHTML) + parseFloat(price); 
+                        grandTotal += parseFloat(price);
+                        grandTotalDiv.innerHTML = parseFloat(grandTotal).toFixed(2);
+                    }); 
+                
+                    let tr = document.createElement("tr");
+                    tr.appendChild(nomeTd);
+                    tr.appendChild(priceTd);
+
+                    table.appendChild(tr);
+
+                    index.removeChild(div);
+                }
+            }
+
+            function checkout(){
+                let body = document.getElementsByTagName("body")[0];
+                body.remove();
+
+                let h1 = document.createElement("h1");
+                h1.innerHTML = "Thank you for your purchase!";
+                document.getElementsByTagName("html")[0].appendChild(document.createElement("body")).appendChild(h1);
+            }
+        </script>
+    </body>
+</html>

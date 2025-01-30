@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Lista della spesa</title>
+    </head>
+    <body>
+        <h1>Lista della spesa</h1>
+        <input type="text" id="item" placeholder="Inserisci un prodotto">
+        <button id="add" >Aggiungi</button>
+
+        <h2>Prodotti:</h2>
+        <div id="lista" >nessun prodotto inserito!</div>
+        <br>
+        <h2>Operazioni:</h2>
+        <button id="empty">Svuota lista</button>
+        <button id="sort">Ordina lista</button>
+        <button id="reverse">Inverti lista</button>
+
+        <script>
+            let input = document.getElementById("item");
+            let lista = document.getElementById("lista");
+
+            let add = document.getElementById("add");
+            let empty = document.getElementById("empty");
+            let sort = document.getElementById("sort");
+            let reverse = document.getElementById("reverse");
+
+            add.addEventListener("click", () =>{
+                if(input.value == ""){
+                    return;
+                }
+                if(lista.innerHTML == "nessun prodotto inserito!"){
+                    lista.innerHTML = "";
+                }
+                let item = input.value;
+                lista.innerHTML += "<li class='item' >" + item + "</li>";
+                input.value = "";
+            })
+
+            empty.addEventListener("click", () => {
+                if(lista.innerHTML == "nessun prodotto inserito!"){
+                    return;
+                }
+                lista.innerHTML = "nessun prodotto inserito!";
+            })
+
+            sort.addEventListener("click", () => {
+                if(lista.innerHTML == "nessun prodotto inserito!"){
+                    return;
+                }
+                let items = Array.from(document.getElementsByClassName("item"));
+                items.sort((a, b) => {
+                    return a.innerHTML.localeCompare(b.innerHTML);
+                })
+                lista.innerHTML = "";
+                items.forEach((item) => {
+                    lista.innerHTML += item.outerHTML;
+                })
+            })
+
+            reverse.addEventListener("click", () => {
+                if(lista.innerHTML == "nessun prodotto inserito!"){
+                    return;
+                }
+                let items = Array.from(document.getElementsByClassName("item"));
+                items.reverse();
+                lista.innerHTML = "";
+                items.forEach((item) => {
+                    lista.innerHTML += item.outerHTML;
+                })
+            })
+
+        </script>
+    </body>
+</html>

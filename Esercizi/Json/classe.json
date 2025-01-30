@@ -1,0 +1,37 @@
+{
+  "nome": "4a",
+  "scuola": "scuola elementare",
+  "insegnanti": [
+    {
+      "nome": "Anna",
+      "cognome": "Blue",
+      "materieInsegnate": ["Italiano", "Storia", "Geografia"]
+    },
+    {
+      "nome": "Mario",
+      "cognome": "Bortolozzi",
+      "materieInsegnate": ["Algoritmi", "Matematica"]
+    }
+  ],
+  "alunni": [
+    {
+      "nome": "Pietro",
+      "cognome": "Donega"
+    },
+    {
+      "nome": "Mirco",
+      "cognome": "Mellara"
+    },
+    {
+      "nome": "Pietro",
+      "Cognome": "Visconti"
+    }
+  ],
+  "orari": [
+    "mattina": ["storia", "matematica"],
+    "pomeriggio": ["italiano", "algoritmi", "Geografia"],
+  ],
+  "numeroAlunni": 3,
+  "scuolaSabato": false,
+
+}

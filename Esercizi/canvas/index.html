@@ -1,0 +1,36 @@
+<html>
+    <body bgcolor="#ffff55">
+        <canvas id = "myCanvas"  width="320" height="240"></canvas>
+        <canvas id = "myCanvasLine"  width="320" height="240"></canvas>
+        <canvas id = "myCanvasLine2"  width="320" height="240"></canvas>
+
+        <script>
+            let myC = document.getElementById("myCanvas");
+            let g = myC.getContext("2d");
+            g.fillStyle = "ff000";
+            g.fillRect(10, 10, 100, 100);
+            g.beginPath();
+            g.arc(50, 50, 40, 0, 2 * Math.PI, false);
+            g.fillStyle = "#00ff0099";
+            g.fill();
+
+
+            let myCLine = document.getElementById("myCanvasLine");
+            let gLine = myCLine.getContext("2d");
+            gLine.beginPath();
+            gLine.moveTo(10, 10);
+            gLine.lineTo(100, 100);
+            gLine.stroke();
+
+
+            let myCLine2 = document.getElementById("myCanvasLine2");
+            let gLine2 = myCLine2.getContext("2d");
+            gLine2.beginPath();
+            gLine2.moveTo(10, 10);
+            gLine2.lineTo(100, 50);
+            gLine2.lineTo(10, 100);
+            gLine2.lineTo(10, 10);
+            gLine2.stroke();
+        </script>
+    </body>
+</html>

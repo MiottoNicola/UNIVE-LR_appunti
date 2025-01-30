@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Digital Clock</title>
+        <style>
+            #clock{
+                font: bold 24px sans-serif;
+                background: #ddf;
+                padding: 15px;
+                border: solid black 2px;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+    <body align="center" >
+        <h1>Digital clock</h1>
+        <span id="clock"></span>
+        <br/><br/><br/>
+        <button onclick="alert('Hello!\nThis is an alert message.')">Click me!</button>
+        <br/>
+        <button id="buttonClick">Click me!</button>
+
+        <script>
+            function displayTime(){
+                let clock = document.getElementById("clock");
+                let now = new Date();
+                clock.textContent = now.toLocaleTimeString();
+            }
+            displayTime;
+            setInterval(displayTime, 1000);
+
+            let b = document.querySelector("#buttonClick");
+            b.onclick = function(){ alert("Hello!\nThis is an alert message."); };
+            b.addEventListener("click", function(){ alert("Hello!\nThis is another alert message."); });
+        </script>
+    </body>
+</html>
